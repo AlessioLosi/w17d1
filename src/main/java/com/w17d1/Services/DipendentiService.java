@@ -32,7 +32,7 @@ public class DipendentiService {
         );
 
         Dipendente newDipentente = new Dipendente(body.username(), body.nome(), body.cognome(), body.email(),
-                "https://ui-avatars.com/api/?name=" + body.nome() + "+" + body.cognome());
+                "https://ui-avatars.com/api/?name=" + body.nome() + "+" + body.cognome(), body.password());
 
 
         return this.diR.save(newDipentente);
@@ -90,5 +90,9 @@ public class DipendentiService {
         return url;
 
 
+    }
+
+    public Dipendente findByUsername(String username) {
+        return (Dipendente) this.diR.findByEmail(username).orElseThrow(() -> new NotFoundException("L'utente con l'username: " + username + " non è stato trovato"));
     }
 }
