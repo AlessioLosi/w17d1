@@ -23,11 +23,13 @@ public class AuthenticationController {
     @Autowired
     private DipendentiService diS;
 
+    //2. POST http://localhost:3001/auth/login (+ req.body) --> 201
     @PostMapping("/login")
     public LoginResponseDTO login(@RequestBody LoginDipendentiDTO body) {
         return new LoginResponseDTO(this.loS.checkCredentialsAndGenerateToken(body));
     }
 
+    // 2. POST http://localhost:3001/auth/register
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public Dipendente save(@RequestBody @Validated NewDipendenteDTO body, BindingResult validationResult) {
